@@ -1,0 +1,17 @@
+{% extends "layout.html" %} 
+
+{% block content %} 
+
+<div class="container" style="padding-top: 35px;">
+    <h3>SKU NO EXISTE EN LA BASE DE DATOS DE PRODUCTOS</h3>
+    {%  for faltantes_1 in faltantes_1 %}
+         {{faltantes_1}}<br>
+    {% endfor %}
+
+    {%  for faltantes_2 in faltantes_2 %}
+         {{faltantes_2}}<br>
+    {% endfor %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% with messages =  get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+    <p>{{ message }}</p>
+{% endfor %}
+{% endif %}
+{% endwith %}
+{% extends "layout.html" %} 
+
+{% block content %} 
+
+<div class="container">
+
+    <h1>Integración Wonder Web</h1>
+
+    <div class="container" style="padding-top: 20px;">
+        <a class="btn btn-info" data-toggle="collapse" href="{{ url_for('woo.sincronizaInventario') }}" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Sincronizar Inventario</a>
+    </div><br>
+   
+    <div class="container" style="padding-top: 20px;">
+        <p>Para actualizar los estados de producto es necesario reemplazar el archivo ubicado en C:\python\cambio_estado.xlsx</p>
+        <p>completed</p>
+        <p>pending</p>
+        <p>cancelled</p>
+        <p>failed</p>
+        <p>trash</p>
+        
+
+        <a class="btn btn-success" data-toggle="collapse" href="{{ url_for('woo.ordenes') }}" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Actualizar Estados</a>
+    </div>
+    
+
+    <div class="container" style="padding-top: 20px;">
+        <a class="btn btn-info" data-toggle="collapse" href="{{ url_for('woo.pedidosWonder') }}" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Genera reporte pedidos Wonder</a>
+    </div><br>
+
+</div>
+
+
+{% endblock %}

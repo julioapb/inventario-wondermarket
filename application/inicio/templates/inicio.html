@@ -1,0 +1,179 @@
+{% extends "layout.html" %} 
+{% if session['usuario'] %}
+   
+{% else %}
+    <script>window.location.href = "{{ url_for('sesion.login') }}";</script>
+{% endif %}
+
+{% block content %} 
+ <!-- Mostrar mensajes flash -->
+ <div class="flash-popup">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="flash-message {{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</div>
+<div class="container" style="padding-top: 35px;">
+    <!--<p>Bienvenid@: {{ session['usuario'] }}</p>-->
+    <div class="row text-center">
+        <div class="col-lg-6">
+            <button type="button" class="btn btn-primary btn-lg" id="btn_producto_simple">PRODUCTO SIMPLE</button>
+        </div>
+        <div class="col-lg-6">
+            <button type="button" class="btn btn-primary btn-lg" id="btn_producto_multiple">PRODUCTO MULTIPLE</button>
+        </div>
+    </div>
+    <div id="producto_simple">
+        <form  id="form_nuevo_producto" action= '/add_product' method="POST" class="needs-validation" novalidate>
+            <div class="row">
+                <div class="col-lg-6">
+                    <label for="nombreproducto" class="form-label">NOMBRE PRODUCTO</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" required>
+                    <div class="valid-tooltip">¡ campo valido!</div>
+                    <div class="invalid-tooltip">¡ campo valido!</div>
+                </div>
+                <div class="col-lg-6">
+                    <label for="skuindivisible" class="form-label">SKU INDIVISIBLE</label>
+                    <input type="text" class="form-control" id="sku_indivisible" name="sku_indivisible" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3">
+                    <label for="skupadre" class="form-label">SKU</label>
+                    <input type="text" class="form-control" id="sku_padre" name="sku_padre" required>
+                </div>
+                <div class="col-lg-3">
+                    <label for="ean" class="form-label">EAN</label>
+                    <input type="text" class="form-control" id="ean" name="ean">
+                </div>
+                <div class="col-lg-3">
+                    <label for="ean" class="form-label">FECHA CADUCIDAD</label>
+                    <input type="date" class="form-control" id="fecha_caducidad" name="fecha_caducidad">
+                </div>
+                <div class="col-lg-3">
+                    <label for="ean" class="form-label">COSTE</label>
+                    <input type="number"  step="0.01" class="form-control" id="precio" name="precio" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3">
+                    <label for="cantidad" class="form-label">RELACIÓN</label>
+                    <input type="number" class="form-control" id="cantidad" name="cantidad" required>
+                </div>
+                <div class="col-lg-3">
+                    <label for="impuesto" class="form-label">IMPUESTO</label>
+                    <input type="number" class="form-control" id="impuesto" name="impuesto">
+                </div>
+                <div class="col-lg-6">
+                    <label for="floatingTextarea" class="form-label">DESCRIPCIÓN</label>
+                    <textarea class="form-control" placeholder="Describe el nuevo producto" id="descripcion" name="descripcion" required></textarea>
+                    <div id="charCount" class="character-count">0/40 caracteres</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3">
+                    <label for="localizacion" class="form-label">LOCALIZACIÓN</label>
+                    <input type="text" class="form-control" id="localizacion" name="localizacion">
+                </div>
+                <div class="col-lg-3">
+                    <label for="localizacion" class="form-label">PROMOCIÓN</label>
+                    <select id="promocion" class="form-control" name="promocion">
+                        <option selected></option>
+                        <option value="Sí">Sí</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+                <div class="col-lg-3">
+                    <label for="localizacion" class="form-label">SKU TRANSITORIO</label>
+                    <input type="text" class="form-control" id="sku_transitorio" name="sku_transitorio">
+                </div>
+                <div class="col-lg-3">
+                    <label for="localizacion" class="form-label">CANTIDAD TRANSITORIO</label>
+                    <input type="text" class="form-control" id="cant_trans" name="cant_trans">
+                </div>
+                <div class="col-lg-3">
+                    <label for="VALORACION" class="form-label">VALORACIÓN</label>
+                    <select id="valoracion" class="form-control" name="valoracion">
+                        <option selected></option>
+                        <option value="Sí">Sí</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+                <div class="col-lg-3">
+                    <label for="ean" class="form-label">PESO</label>
+                    <input type="number"  step="0.01" class="form-control" id="peso" name="peso">
+                </div>
+            </div>
+            
+            <div class="row">
+                <div style="padding: 20px;" class="col-lg-12">
+                    <button type="submit" class="btn btn-primary btn-lg" id="btn_nuevo_produto">GUARDAR</button>
+                </div>
+            </div>
+           
+        </form>
+    </div>
+    <div id="producto_combo">
+        <!--<form id="form_combo" action= '/combo' method="POST" class="needs-validation" novalidate>
+            <div class="row">
+                <div class="col-lg-6">
+                    <label for="skuindivisible" class="form-label">NOMBRE SKU COMBO</label>
+                    <input type="text" class="form-control" id="nombre_sku_combo" name="nombre_sku_combo" required>
+                </div>
+                <div class="col-lg-6">
+                    <label for="skuindivisible" class="form-label">SKU COMBO</label>
+                    <input type="text" class="form-control" id="sku_combo" name="sku_combo" required>
+                </div>
+                <div class="col-lg-6">
+                    <label for="skuindivisible" class="form-label">SKU INDIVISIBLE</label>
+                    <div class="field_wrapper">
+                        <div>
+                            <input type="text" id="field_name" name="field_name" value=" " class="form-control"/>
+                            <a href="javascript:void(0);" class="add_button" title="Add field"><img src="{{ url_for('static', filename='add-icon.png')}}" width="20opx"/></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div id="campos-dinamicos">
+                        Campos dinámicos se agregarán aquí
+                        </div>
+                
+                        <button type="button" onclick="agregarCampo()">Agregar Campo</button>
+                    </div>
+                    <div style="padding: 20px;" class="col-lg-12">
+                        <button type="submit" class="btn btn-primary btn-lg" id="btn_combo">GUARDAR</button>
+                    </div>
+                    
+                </div>
+            </div>
+        </form>-->
+        <form  method="post" action="/combo" method="POST" class="needs-validation">
+            <div class="row">
+                <div class="col-lg-6">
+                    <label for="nombre" class="form-label">Nombre SKU Combo:</label>
+                    <input type="text" id="nombre_combo" name="nombre_combo" class="form-control" required><br>
+                </div>
+                <div class="col-lg-6">
+                    <label for="sku" class="form-label">sku combo:</label>
+                    <input type="text" id="sku_combo" name="sku_combo"class="form-control" required><br>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div id="campos-dinamicos">
+                        <!-- Campos dinámicos se agregarán aquí -->
+                        <button class="btn btn-primary btn-lg" type="button" onclick="agregarCampo()">Agregar Campo</button><br><br>
+                        
+                    </div>
+                    <button class="btn btn-danger btn-lg" type="button" onclick="eliminarCampo()">Eliminar Campo</button><br><br>
+                    <input type="submit"  class="btn btn-success btn-lg" value="Guardar">
+                </div>                
+            </div>
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,53 @@
+{% with messages =  get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+    <p>{{ message }}</p>
+{% endfor %}
+{% endif %}
+{% endwith %}
+{% extends "layout.html" %} 
+
+{% block content %} 
+
+<div class="container" style="padding-top: 20px;">
+    <a class="btn btn-primary" data-toggle="collapse" href="{{ url_for('reportes.download_report') }}" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Reporte Inventario</a>
+</div>
+
+<div class="container" style="padding-top: 20px;">
+    <a class="btn btn-secondary" data-toggle="collapse" href="{{ url_for('reportes.download_report_2') }}" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Reporte Productos</a>
+</div>
+
+<div class="container" style="padding-top: 20px;">
+    <a class="btn btn-info" data-toggle="collapse" href="{{ url_for('reportes.download_report_3') }}" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Reporte Pedidos</a>
+</div>
+
+<div class="container" style="padding-top: 20px;">
+    <a class="btn btn-info" data-toggle="collapse" href="{{ url_for('reportes.download_report_4') }}" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Reporte Foto Diaria</a>
+</div>
+
+<div class="container" style="padding-top: 20px;">
+    <a class="btn btn-info" data-toggle="collapse" href="{{ url_for('reportes.download_report_5') }}" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">SKU X PROVEEDOR</a>
+</div>
+
+<div class="container" style="padding-top: 20px;">
+    <a class="btn btn-info" data-toggle="collapse" href="{{ url_for('reportes.download_report_6') }}" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">COMBOS</a>
+</div><br>
+<h3>REPORTE DIARIO</h3>
+<div class="container" style="padding-top: 20px;">
+    <div class="col-lg-4">
+        <form action= '/download_report_7' method="POST">
+            <input type="date" class="form-control" id="fecha_1" name="fecha_1" placeholder="FECHA 1" required><br>
+            <input type="date" class="form-control" id="fecha_2" name="fecha_2"  placeholder="FECHA 2" required><br>  
+            <button class="btn btn-primary" type="submit">GENERAR REPORTE DIARIO CALCULADO</button><br><br>
+            <a class="btn btn-primary" data-toggle="collapse" href="{{ url_for('reportes.download_report_8') }}" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">GENERAR REPORTE DIARIO SIN CALCULAR</a><br>
+        </form>
+        <div class="container" style="padding-top: 20px;">
+            
+        </div><br>
+    </div>
+</div>
+
+{% endblock %}
+        
+
+

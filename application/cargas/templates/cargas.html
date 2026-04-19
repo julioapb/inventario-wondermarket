@@ -1,0 +1,25 @@
+{% with messages =  get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+    <p>{{ message }}</p>
+{% endfor %}
+{% endif %}
+{% endwith %}
+{% extends "layout.html" %} 
+
+{% block content %} 
+
+<div class="container" style="padding-top: 20px;">
+        <p style="font-size:25px">Cargar Archivo</p>
+        <form action="upload" enctype='multipart/form-data' method='POST'>
+            <input type="file" name="file">
+            <input type = "submit" value = "Subir">
+        </form>
+    
+        <!--<p> <a href="{{ url_for('cargas.cargar_productos')}}" class="btn btn-warning btn-lg" role="button">CARGAR PRODUCTOS</a> </p>-->
+</div>
+
+{% endblock %}
+        
+
+

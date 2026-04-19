@@ -1,0 +1,99 @@
+{% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="flash">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+{% extends "layout.html" %} 
+
+{% block content %} 
+
+<div class="container">
+
+    <h1>Ingresos</h1>
+
+
+    <p>Para realizar la cargue se deben poner los ingresos en el fichero cargas_ingresos.xlsx que se encuentra ubicado en C:/python</p>
+    <p>Y a continucion dar en el link Cargar Ingresos para que se guarden en la tabla corresponidiente</p>
+    <a class="nav-link" href="{{ url_for('gestion_ingresos.cargueIngresos')}}">Cargar Ingresos</a>
+    
+    <p>Valida que los sku del cargue ingreso existan</p>
+    <a class="nav-link" href="{{ url_for('gestion_ingresos.validaIngreso')}}">Valida SKU a ingresar</a>
+    
+    <p>Valida que los proveedores repetidos</p>
+    <a class="nav-link" href="{{ url_for('gestion_ingresos.funcioP')}}">Valida proveedores repetidos</a>
+    
+    <p>Valida que los proveedores se encuentren correctamente</p>
+    <a class="nav-link" href="{{ url_for('gestion_ingresos.controlap')}}">Actualiza o Inserta proveedor según el caso</a>
+    
+    <div class="row">
+     <div class="col-lg-12">
+          <div class="table-responsive">
+          <table class="table table-bordered table-hover" id="myTable">
+            <thead>
+              <tr>
+                <th scope="col">QTY CARGA</th>
+                <th scope="col">QTY INVENTARIO</th>
+                <th scope="col">QTY FINAL</th>
+                <th scope="col">FECHA</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+                 {%  for data_ingreso_antes in data_ingreso_antes %}
+                 <tr>
+                   <td>{{ data_ingreso_antes.1}}</td>
+                   <td>{{ data_ingreso_antes.2}}</td>
+                   <td>{{ data_ingreso_antes.3}}</td>
+                   <td>{{ data_ingreso_antes.4}}</td>
+                 </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        </div>
+
+        <details>
+          <summary>DETALLE MOVIMIENTOS
+          </summary> <div class="col-lg-12">
+            <div class="table-responsive">
+              <table class="table table-bordered table-hover" id="myTable_2">
+                <thead>
+                  <tr>
+                    <th scope="col">PRODUCTO</th>
+                    <th scope="col">QTY CARGA</th>
+                    <th scope="col">QTY INVENTARIO</th>
+                    <th scope="col">TOTAL</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {%  for data_calculada in data_calculada %}
+                <tr>
+                  <td>{{ data_calculada.1}}</td>
+                  <td>{{ data_calculada.2}}</td>
+                  <td>{{ data_calculada.3}}</td>
+                  <td>{{ data_calculada.4 | int}}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div></details>
+        </div><br><br>
+    
+    <p>Luego dar click en el link Actualiza Ingresos para actualizar la cantidad del inventario</p>
+    <a class="nav-link" href="{{ url_for('gestion_ingresos.calculaIng')}}">Actualiza Ingresos</a>
+
+    <h2> Total en inventario: <b>{{ qty_inventario }}</b></h2>
+
+    <p>Para finalizar se debe reestablecer la tabla ingresos mediante el siguiente link:</p>
+    <a class="nav-link" href="{{ url_for('gestion_ingresos.eliminaTabla')}}">Restablece Tabla Ingresos</a>
+    
+
+    
+</div>
+
+{% endblock %}

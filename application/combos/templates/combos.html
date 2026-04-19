@@ -1,0 +1,53 @@
+{% with messages =  get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+    <p>{{ message }}</p>
+{% endfor %}
+{% endif %}
+{% endwith %}
+{% extends "layout.html" %} 
+
+{% block content %} 
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="col-lg-4">
+                <input type="text" class="form-control" id="myCombos" onkeyup="combos()" placeholder="Buscar SKU COMBO" required><br>
+            </div>
+        </div>
+    </div>
+        <div class="col-lg-12">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover" id="myTable">
+                    <thead>
+                    <tr>
+                    <th scope="col">SKU COMBO</th>
+                    <th scope="col">NOMBRE COMBO</th>
+                    <th scope="col">SKU_INDIVISIBLE</th>
+                    <th scope="col">EDIT</th>
+                    <th scope="col">ELIMINAR</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {%  for combos in combos %}
+                    <tr>
+                    <td>{{ combos.1}}</td>
+                    <td>{{ combos.2}}</td>
+                    <td>{{ combos.3}}</td>
+                    <td><a href="/edit_combo/{{combos.0}}">Editar Combo</a></td>
+                    <td><a href="/delete_combo/{{combos.0}}">Eliminar Combo</a></td>
+                    </tr>
+
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

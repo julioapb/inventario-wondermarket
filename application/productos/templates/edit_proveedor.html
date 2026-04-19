@@ -1,0 +1,55 @@
+{% with messages =  get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+    <p>{{ message }}</p>
+{% endfor %}
+{% endif %}
+{% endwith %}
+{% extends "layout.html" %} 
+
+{% block content %} 
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <form action= '/update_proveedor/{{ proveedor.0.0 }}' method="POST">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label for="nombreproducto" class="form-label">ID</label>
+                        <input type="text" class="form-control" id="id" name="id" value= "{{ proveedor.0.0}}">
+                    </div>
+                    <div class="col-lg-6">
+                        <label for="skuindivisible" class="form-label">SKU INDIVISIBLE</label>
+                        <input type="text" class="form-control" id="sku_indivisible" name="sku_indivisible" value= "{{ proveedor.0.1 }}">
+                    </div>
+                    <div class="col-lg-6">
+                        <label for="skuindivisible" class="form-label">PROVEEDOR</label>
+                        <input type="text" class="form-control" id="proveedor" name="proveedor" value= "{{ proveedor.0.2 }}">
+                    </div>
+                    <div class="col-lg-6">
+                        <label for="skuindivisible" class="form-label">COSTE</label>
+                        <input type="text" class="form-control" id="precio" name="precio" value= "{{ proveedor.0.3 }}">
+                    </div>
+                    <div class="col-lg-6">
+                        <label for="skuindivisible" class="form-label">ORDEN</label>
+                        <!--<input type="text" class="form-control" id="precio" name="orden" value= "{{ proveedor.0.4 }}">-->
+                        <select class="form-select" name="orden" id="orden" aria-label="Default select example">
+                            <option value="{{ proveedor.0.4 }}">{{ proveedor.0.4 }}</option>
+                            <option value="P">P</option>
+                            <option value=" ">Blanco</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="padding: 20px;" class="col-lg-12">
+                    <button type="submit" class="btn btn-primary btn_lg" id="btn_nuevo_produto">EDITAR</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+</div>
+    
+{% endblock %}
+        
+
+

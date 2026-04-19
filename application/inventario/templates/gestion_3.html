@@ -1,0 +1,41 @@
+{% extends "layout.html" %} 
+
+{% block content %} 
+
+<div class="container" style="padding-top: 35px;">
+
+    <form  id="form_ingreso_inventario" action= '/ingreso_inventario_2' method="POST" class="needs-validation" novalidate>
+        <div class="row">
+            <div class="col-lg-6">
+                <label for="skuindivisible" class="form-label">SKU INDIVISIBLE</label>
+                <input type="text" class="form-control" id="sku_indivisible" name="sku_indivisible" required>
+            </div>
+            <div class="col-lg-6">
+                <label for="cantidad" class="form-label">CANTIDAD</label>
+                <input type="number" class="form-control" id="cantidad" name="cantidad" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <label for="floatingTextarea" class="form-label">TIPO INGRESO</label>
+                <select class="form-select" aria-label="Default select example" id="tipo_ingreso" name="tipo_ingreso">
+                    <option selected></option>
+                    <option value="fisico">FISICO</option>
+                    <option value="en_progrso">EN PROGRESO</option>
+                  </select>
+            </div>
+            <div class="col-lg-6">
+                <label for="floatingTextarea" class="form-label"># DE FACTURA</label>
+                <input type="number" class="form-control" id="no_factura" name="no_factura" required>
+            </div>
+        </div>
+        <div class="row">
+            <div style="padding: 20px;" class="col-lg-12">
+                <button type="submit" class="btn btn-primary btn-lg" id="btn_nuevo_produto">GUARDAR</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+{% endblock %}

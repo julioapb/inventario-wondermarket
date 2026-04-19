@@ -1,0 +1,79 @@
+{% with messages =  get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+    <p>{{ message }}</p>
+{% endfor %}
+{% endif %}
+{% endwith %}
+{% extends "layout.html" %} 
+
+{% block content %} 
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <br>
+            <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">SKU COMBO</th>
+                    <th scope="col">NOMBRE COMBO</th>
+                    <th scope="col">SKU INDIVISIBLE</th>
+                    <th scope="col">Editar</th>
+                    <th scope="col">Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {%  for combos in combos %}
+                    <tr>
+                    <td>{{ combos.0}}</td>
+                    <td>{{ combos.1}}</td>
+                    <!--<td><input type="text" class="form-control" id="combos" name="proveedor" value="{{ combos.2}}"></td>-->
+                    <td>{{ combos.2}}</td>
+                    <td>{{ combos.3}}</td>
+                    <td><a href="/edit_item_combo/{{combos.0}}">Editar</a></td>
+
+                    <td><a href="/delete_item_combo/{{combos.0}}">Eliminar</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <br><br><br>
+            <h3>NUEVO ITEM COMBO</h3>
+            <form action= '/new_item/{{ combos.0 }}' method="POST">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label for="nombreproducto" class="form-label">SKU COMBO</label>
+                        <input type="text" class="form-control" id="sku_combo" name="sku_combo" value= "{{ combos.0.1 }}" readonly>
+                    </div>
+                    <div class="col-lg-6">
+                        <label for="skuindivisible" class="form-label">NOMBRE COMBO</label>
+                        <input type="text" class="form-control" id="nombre_combo" name="nombre_combo" value= "{{ combos.0.2 }}" readonly>
+                    </div>
+                    <div class="col-lg-6">
+                        <label for="skuindivisible" class="form-label">NUEVOO SKU INDIVISIBLE</label>
+                        <input type="text" class="form-control" id="sku_indivisible" name="sku_indivisible" value= "">
+                    </div>
+                    <div class="col-lg-6">
+                        <label for="skuindivisible" class="form-label">CANTIDAD</label>
+                        <input type="number" class="form-control" id="cantidad" name="cantidad" value= "{{ combos.0.4 }}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <br>
+                        <button type="submit" class="btn btn-primary btn_lg" id="btn_nuevo_item">NUEVO ITEM COMBO</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+        

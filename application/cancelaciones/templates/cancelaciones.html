@@ -1,0 +1,48 @@
+{% extends "layout.html" %} 
+
+{% block content %} 
+
+<div class="container">
+  <div class="col-lg-12">
+<div class="col-lg-6" style="padding-bottom: 20px; padding-top: 20px;">
+  
+  <input type="text" class="form-control" id="myInput" onkeyup="cancelaciones()" placeholder="Buscar No de Orden..." required>
+
+</div>
+  <table class="table" id="myTable">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col"># de ORDEN</th>
+        <th scope="col">SKU INDIVISIBLE</th>
+        <th scope="col">CANTIDAD VENDIDA</th>
+        <th scope="col">FECHA</th>
+        <th scope="col">CANCELAR OC</th>
+        <th scope="col">EDITAR OC</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+         {%  for cancelaciones in cancelaciones %}
+         <tr>
+           <td>{{ cancelaciones.0}}</td>
+           <td>{{ cancelaciones.1}}</td>
+           <td>{{ cancelaciones.2}}</td>
+           <td>{{cancelaciones.3}}</td>
+           <td>{{ cancelaciones.4}}</td>
+           
+           <td><a href="/prueba/{{cancelaciones.0}}">Cancelar</a></td>
+           <!--<td><a href="/cancelaciones.edit_cancelacion/{{cancelaciones.0}}">Editar Cancelación</a></td>-->
+         </tr>
+
+         {% endfor %}
+      
+      
+    </tbody>
+  </table>
+</div>
+
+</div>
+
+
+{% endblock %}

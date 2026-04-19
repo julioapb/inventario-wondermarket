@@ -1,0 +1,32 @@
+{% extends "layout.html" %} 
+
+{% block content %} 
+{% for elemento in data %}
+<div class="container" style="padding-top: 20px;">
+    <div class="row">
+        <form action= '/updateInvGral/{{ elemento.0 }}' method="POST">
+            <div class="row">
+                <div class="col-lg-3">
+                    <label for="sku_indivisible" class="form-label">SKU INDIVISIBLE</label>
+                    <input type="text" class="form-control" id="sku_indivisible" name="sku_indivisible" value= "{{ elemento.0 }}" readonly>
+                </div>
+                <div class="col-lg-3">
+                    <label for="cantidad" class="form-label">CANTIDAD</label>
+                    <input type="text" class="form-control" id="cantidad" name="cantidad" value= "{{ elemento.1 }}">
+                </div>
+                <div class="col-lg-3">
+                    <label for="cantidad_en_proceso" class="form-label">CANTIDAD EN PROCESO</label>
+                    <input type="text" class="form-control" id="cantidad_en_proceso" name="cantidad_en_proceso" value= "{{ elemento.2 }}" >
+                </div>
+            </div>
+            <div class="col-lg-3"><BR>
+                <button type="submit" class="btn btn-primary btn-block" id="btn_edit_invent">EDITAR INVENTARIO</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}
+        
+ 
+

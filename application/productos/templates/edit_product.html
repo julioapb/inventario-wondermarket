@@ -1,0 +1,176 @@
+{% with messages =  get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+    <p>{{ message }}</p>
+{% endfor %}
+{% endif %}
+{% endwith %}
+{% extends "layout.html" %} 
+
+{% block content %} 
+
+<div class="container" style="padding-top: 20px;">
+    <div class="row">
+    <form action= '/update/{{ product.0 }}' method="POST">
+        <div class="row">
+            <div class="col-lg-6">
+                <label for="nombreproducto" class="form-label">NOMBRE PRODUCTO</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" value= "{{ product.4 }}">
+            </div>
+            <div class="col-lg-6">
+                <label for="skuindivisible" class="form-label">SKU INDIVISIBLE</label>
+                <input type="text" class="form-control" id="sku_indivisible" name="sku_indivisible" value= "{{ product.1 }}">
+            </div>
+        </div>
+        <div class="row">
+            
+            <div class="col-lg-3">
+                <label for="skupadre" class="form-label">SKU</label>
+                <input type="text" class="form-control" id="sku_padre" name="sku_padre" value= "{{ product.2 }}" >
+            </div>
+            <div class="col-lg-3">
+                <label for="ean" class="form-label">EAN</label>
+                <input type="text" class="form-control" id="ean" name="ean" value= "{{ product.3 }}">
+            </div>
+            <div class="col-lg-3">
+                <label for="ean" class="form-label">FECHA CADUCIDAD</label>
+                <input type="date" class="form-control" id="fecha_caducidad" name="fecha_caducidad" value= "{{ product.7 }}">
+            </div>
+            <div class="col-lg-3">
+                <label for="ean" class="form-label">COSTE</label>
+                <input type="number" step="0.01" class="form-control" id="precio" name="precio" value= "{{ product.10 }}">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <label for="cantidad" class="form-label">CANTIDAD</label>
+                <input type="number" class="form-control" id="cantidad" name="cantidad" value= "{{ product.5 }}">
+            </div>
+            <div class="col-lg-3">
+                <label for="impuesto" class="form-label">IMPUESTO</label>
+                <input type="number" class="form-control" id="impuesto" name="impuesto" value= "{{ product.6 }}">
+            </div>
+            <div class="col-lg-6">
+                <label for="floatingTextarea" class="form-label">DESCRIPCIÓN</label>
+                <textarea class="form-control" placeholder="Describe el nuevo producto" id="descripcion" name="descripcion">{{ product.8 }}</textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <label for="skuindivisible" class="form-label">LOCALIZACIÓN</label>
+                <input type="text" class="form-control" id="localizacion" name="localizacion" value= "{{ product.12 }}">
+            </div>
+            <div class="col-lg-3">
+                <label for="skuindivisible" class="form-label">TIPO PRODUCTO</label>
+                <input type="text" class="form-control" id="tipo_producto" name="tipo_producto" value= "{{ product.11 }}">
+            </div>
+            <div class="col-lg-6">
+                <label for="skuindivisible" class="form-label">PROMOCIÓN</label>
+                <select id="promocion" class="form-control" name="promocion">
+                    <option selected>{{ product.13 }}</option>
+                    <option value="Sí">Sí</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <label for="skuindivisible" class="form-label">SKU TRANSITORIO</label>
+                <input type="text" class="form-control" id="sku_transitorio" name="sku_transitorio" value= "{{ product.14 }}">
+            </div>
+            <div class="col-lg-6">
+                <label for="valoracion" class="form-label">VALORACIÓN</label>
+                <select id="valoracion" class="form-control" name="valoracion">
+                    <option selected>{{ product.15 }}</option>
+                    <option value="Sí">Sí</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <label for="ean" class="form-label">PESO</label>
+                <input type="number"  step="0.01" class="form-control" id="peso" name="peso" value="{{ product.16 }}">
+            </div>
+            <div class="col-lg-3">
+                <label for="ean" class="form-label">CANTIDAD TRANSITORIO</label>
+                <input type="number"  class="form-control" id="cant_trans" name="cant_trans" value="{{ product.17 }}">
+            </div>
+        </div>
+        <div class="row">
+            <div style="padding: 20px;" class="col-lg-12">
+                <button type="submit" class="btn btn-primary btn_lg" id="btn_nuevo_produto">EDITAR</button>
+            </div>
+        </div>
+    </form>
+    </div>
+
+    <!-- proveedor -->
+
+    <div class="row">
+        <h3 style="text-align: center;">PROVEEDOR X PRECIO</h1><br><br><br>
+    <div class="col-lg-6">
+        
+    <form id="form_proveedor"> 
+        <div class="col-lg-6">
+            <label for="skuindivisible" class="form-label">SKU INDIVISIBLE</label>
+            <input type="text" class="form-control" id="sku_indivisible_2" name="sku_indivisible_2" value= "{{ product.2 }}" readonly>
+        </div>
+        <div class="col-lg-6">
+            <label for="skuindivisible" class="form-label">PROVEEDOR</label>
+            <!--<input type="text" class="form-control" id="proveedor" name="proveedor">-->
+            <select class="form-select" aria-label="Default select example" id="proveedor" name="proveedor">
+                <option selected>Seleccione Proveedor</option>
+                {%  for lista in lista %}
+                    <option value="{{ lista.1 }}">{{ lista.1 }}</option>
+                {% endfor %}
+            </select>
+
+        </div>
+        <div class="col-lg-6">
+            <label for="skuindivisible" class="form-label">COSTE</label>
+            <input type="text" class="form-control" id="precio" name="precio">
+        </div>
+        <div class="col-lg-6" style="padding-top: 15px;">
+            <button type="button" class="btn btn-primary" id="btn_p">AÑADIR PROVEEDOR</button>
+            <div id="respuesta"></div>
+        </div>
+    </form>
+    </div>
+    <div class="col-lg-6">
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">SKU</th>
+                <th scope="col">Proveedor</th>
+                <th scope="col">Coste</th>
+                <th scope="col">Orden</th>
+                <th scope="col">Editar</th>
+                <th scope="col">Eliminar</th>
+              </tr>
+            </thead>
+            <tbody>
+                {%  for proveedor in proveedor %}
+                <tr>
+                    <td><input type="text" class="form-control" id="id" name="id" value="{{ proveedor.0}}"></td>
+                    <td><input type="text" class="form-control" id="sku" name="sku" value="{{ proveedor.1}}"></td>
+                    <!--<td><input type="text" class="form-control" id="proveedor" name="proveedor" value="{{ proveedor.2}}"></td>-->
+                    <td>{{ proveedor.2}}</td>
+                    <td><input type="text" class="form-control" id="precio" name="precio" value="{{ proveedor.3}}"></td>
+                    <td><input type="text" class="form-control" id="orden" name="orden" value="{{ proveedor.4}}"></td>
+                    <td><a href="/edit_proveedor/{{proveedor.0}}">Editar Proveedor</a></td>
+                    
+                    <td><a href="/delete_proveedor/{{proveedor.0}}">Eliminar Proveedor</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <button type="button" class="btn btn-primary" id="btn_r">ACTUALIZAR</button>
+            <div id="respuesta_delete"></div>
+          </table>
+{% endblock %}
+        
+    </div>
+    </div>
+</div>
+

@@ -1,0 +1,49 @@
+{% with messages =  get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+    <p>{{ message }}</p>
+{% endfor %}
+{% endif %}
+{% endwith %}
+{% extends "layout.html" %} 
+
+{% block content %} 
+
+
+
+<div class="container mt-5">
+    <h2>SKU X INGRESOS Y VENTAS</h2>
+    <form action="/grafica" method="POST" class="needs-validation" novalidate>
+        <input type="date" id="fecha_1" name="fecha_1">
+        <input type="date" id="fecha_2" name="fecha_2">
+        <input type="text" id="sku_indivisible" name="sku_indivisible" placeholder="SKU"><br><br>
+        <button type="submit" class="btn btn-primary btn-lg">Calcular</button>
+    </form><br><br>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">SKU</th>
+                <th scope="col">DESDE</th>
+                <th scope="col">HASTA</th>
+                <th scope="col">INGRESOS</th>
+                <th scope="col">VENTAS</th>
+                <th scope="col">DIFERENCIA</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row"> {{sku}} </th>
+                <td> {{fecha_1}} </td>
+                <td> {{fecha_2}} </td>
+                <td> {{ingresos}} </td>
+                <td> {{ventas}} </td>
+                <td> {{diferencia}} </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
+        
+
+

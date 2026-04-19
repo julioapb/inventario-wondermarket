@@ -1,0 +1,71 @@
+{% extends "layout.html" %} 
+
+{% block content %} 
+
+<div class="container">
+        <br><br>
+        <div class="row">
+            <div class="col-lg-4">
+                <input type="text" class="form-control" id="sku_ingresos" onkeyup="skuIngreso()" placeholder="SKU INGRESO" required><br>
+                <input type="TEXT" class="form-control" id="fecha_ingreso" onkeyup="fechaIngreso()" placeholder="FECHA RECIBIDO" required><br>
+                
+            </div>
+            <div class="col-lg-4">
+                <!--<input type="text" class="form-control" id="mySku" onkeyup="sku()" placeholder="SKU" required><br>
+                <input type="text" class="form-control" id="mySkuindivisible" onkeyup="skuindivisible()" placeholder="SKU INDIVISIBLE" required><br>
+                <input type="text" class="form-control" id="myNombre" onkeyup="nombre()" placeholder="NOMBRE" required><br>-->
+            </div>
+        </div>
+
+        <div class="col-lg-12">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover" id="myTable">
+                    <thead>
+                    <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">SKU INDIVISIBLE</th>
+                    <th scope="col">QTY INGRESO</th>
+                    <th scope="col">FECHA</th>
+                    <th scope="col">PRECIO</th>
+                    <th scope="col">PROVEEDOR</th>
+                    <th scope="col">FECHA FACTURA</th>
+                    <th scope="col">FECHA RECIBIDO</th>
+                    <th scope="col">FECHA CADUCIDAD</th>
+                    <!--<th scope="col">FECHA VENCIMIENTO</th>
+                    <th scope="col">OBSERVACIONES</th>-->
+                    <th scope="col">DESCRIPCIÓN</th>
+                    
+                    
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {%  for ingresos in ingresos %}
+                    <tr>
+                        <td>{{ ingresos.0}}</td>
+                        <td>{{ ingresos.1}}</td>
+                        <td>{{ ingresos.2}}</td>
+                        <td>{{ ingresos.3}}</td>
+                        <td>{{ ingresos.4}}</td>
+                        <td>{{ ingresos.5}}</td>
+                        <td>{{ ingresos.6}}</td>
+                        <td>{{ ingresos.7}}</td>
+                        <!--<td>{{ ingresos.8}}</td>
+                        <td>{{ ingresos.9}}</td>-->
+                        <td>{{ ingresos.11}}</td>
+                        <td>{{ ingresos.10}}</td>
+                        
+                        
+                    </tr>
+
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

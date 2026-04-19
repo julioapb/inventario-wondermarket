@@ -1,0 +1,23 @@
+{% with messages =  get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+    <p>{{ message }}</p>
+{% endfor %}
+{% endif %}
+{% endwith %}
+{% extends "layout.html" %} 
+
+{% block content %} 
+
+<div class="container">
+    <br><br>
+    <h4>SKU CON PROVEEDORES REPETIDOS</h4>
+
+    {%  for array_repetidos in array_repetidos %}
+        {{ array_repetidos }}<br>
+    {% endfor %}
+
+    
+</div>
+
+{% endblock %}

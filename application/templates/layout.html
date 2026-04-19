@@ -1,0 +1,166 @@
+{% if session['usuario'] %}
+    
+{% else %}
+    <script>window.location.href = "{{ url_for('sesion.ingreso_usuario') }}";</script>
+{% endif %}
+    
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+        <style>
+          h1, h2, h3{
+            text-align: center;
+            padding-bottom: 0px;
+          }
+
+         
+          .flash-message {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid transparent;
+            border-radius: 5px;
+        }
+
+        .flash-message.success {
+            color: #3c763d;
+            background-color: #dff0d8;
+            border-color: #d6e9c6;
+        }
+
+        .flash-message.error {
+            color: #a94442;
+            background-color: #f2dede;
+            border-color: #ebccd1;
+        }
+
+        /* Estilo para ventana emergente (opcional) */
+        .flash-popup {
+            position: fixed;
+            top: 20px;
+            right: 800px;
+            z-index: 1000;
+            min-width: 300px;
+            max-width: 400px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        td{
+          font-size: 13px;
+        }
+        th{
+          font-size: 13px;
+        }
+    
+    </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <img src="{{ url_for('static', filename='logo_wonder.png')}}" width="15%" style="padding: 10px;"/>
+          </div>
+        </div>
+        <div class="col-lg-12 text-center">
+          Bienvenid@: {{ session['usuario'] }}
+          <a class="nav-link" href="{{ url_for('sesion.logout')}}">Cerrar Sesión</a>
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+              <div class="container-fluid">
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                  <ul class="navbar-nav">
+                    <li class="nav-item">
+                      <a class="nav-link active" aria-current="page" href="{{ url_for('inicio.panel') }}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{{ url_for('inicio.panel') }}">Nuevo Producto</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                       Productos
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="nav-link active" aria-current="page" href="{{ url_for('productos.vistaProductos') }}">Listado Productos</a>
+                        <a class="nav-link" href="{{ url_for('reportes.grafic2')}}">Calculo SKU Ingresos X Ventas</a>
+                      </ul>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{{ url_for('combos.combosget')}}">Combos</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                       Inventario General
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="nav-link" href="{{ url_for('inventario.invent_general')}}">Inventario</a>
+                        <a class="nav-link" href="{{ url_for('inventario.ingreso_inventario')}}">Ingresos</a>
+                        <a class="nav-link" href="{{ url_for('gestion_salidas.gestion')}}">Cargas Salidas</a>
+                        <a class="nav-link" href="{{ url_for('gestion_ingresos.gestion_ing')}}">Cargas entrada</a>
+                        
+                        <a class="nav-link" href="{{ url_for('facturas.invent_facturas')}}">Facturas</a>
+                        <!--<a class="nav-link" href="{{ url_for('cancelaciones.cancelaciones')}}">Cancelaciones</a>-->
+                      </ul>
+                    </li>
+
+                    <li class="nav-item">
+                      <a class="nav-link active" aria-current="page" href="{{ url_for('cargas.carga') }}">Cargas</a>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                       Gestión
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="nav-link" href="{{ url_for('ventas.gestion_cargas')}}">Gestión Salida</a>
+                        <a class="nav-link" href="{{ url_for('gestion_ingresos.gestionIngresos')}}">Gestión Ingresos</a>
+                      </ul>
+                    </li>
+
+                    <li class="nav-item">
+                      <a class="nav-link" href="{{ url_for('woo.integra')}}">Integración Web</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{{ url_for('reportes.report')}}">Reportes</a>
+                    </li>
+                    
+                    
+                  {% if session['usuario']  == 'julio' or session['usuario']  == 'eperez' %}
+                    
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('registro.registroUsuario')}}">Registro</a>
+                  </li>
+                    
+                  {% endif %}  
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('registro.logUsuario')}}">Log Usuarios</a>
+                  </li>                  
+                  </ul>
+                </div>
+              </div>
+            </nav>
+      </div>
+       
+       
+        
+       
+        
+        
+               
+    </div>
+        
+           
+        {% block content %}
+       
+        {% endblock %}
+      
+    
+        
+    </body>
+    </html>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</body>
+</html>

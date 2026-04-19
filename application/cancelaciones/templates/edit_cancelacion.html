@@ -1,0 +1,27 @@
+{% extends "layout.html" %} 
+
+{% block content %} 
+
+
+
+    {{id}}
+
+    {{datos.0.3}}
+
+    <form>
+        <label>id</label>
+        <input type="text" value="{{datos.0.0}}" name="id_cancel" id="id_cancel">
+        <label>Cantidad Vendida</label>
+        <input type="text" value="{{datos.0.3}}" name="cant_v" id="cant_v">
+        <label>Nueva Cantidad Vendida</label>
+        <input type="number" value="{{datos.0.3}}" name="cant_v" id="cant_v">
+        <label>SKU</label>
+        <input type="number" value="{{datos.0.2}}" name="sku" id="sku">
+
+    </form>
+    
+
+{% endblock %}
+        
+
+

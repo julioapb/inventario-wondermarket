@@ -1,0 +1,63 @@
+{% extends "layout.html" %} 
+
+{% block content %} 
+
+<div class="container">
+
+    <form id="form_foto" action= '/filtro' method="POST">
+        <div class="row">
+            <div class="col-lg-4">
+              <input type="date" class="form-control" id="fecha"  name='fecha' placeholder="FECHA INICIAL" required><br>
+              <input type="date" class="form-control" id="fecha_2"  name='fecha_2' placeholder="FECHA FINAL" required><br>
+              <button type="submit" class="btn btn-primary btn-lg" id="btn_combo">GENERAR</button>
+            </div>
+        </div>
+    </form><br>
+    
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="table-responsive">
+        <table class="table table-bordered table-hover" id="myTable">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">SKU INDIVISIBLE</th>
+              <th scope="col">NOMBRE</th>
+              <th scope="col">RELACIÓN</th>
+              <th scope="col">TOTAL VENDIDO</th>
+              <th scope="col">CANTIDAD EN INVENTARIO</th>
+              <th scope="col">ID HC</th>
+              <th scope="col">FECHA</th>
+              <th scope="col">ESTADO</th>
+              <th scope="col">PROVEEDOR</th>
+            </tr>
+          </thead>
+          <tbody>
+               {%  for datos in datos %}
+               <tr>
+                 <td>{{ datos.0}}</td>
+                 <td>{{ datos.1}}</td>
+                 <td>{{ datos.2}}</td>
+                 <td>{{ datos.3}}</td>
+                 <td>{{ datos.4}}</td>
+                 {% if datos.4 > datos.5 %}
+                 <td style='background-color: rgb(255, 0, 0); color:white; text-align: center; font-size: 15px;'>{{ datos.5}}</td>
+                 {% else %}
+                 <td style='background-color: rgb(255, 255, 255); text-align: center; font-size: 15px;'>{{ datos.5}}</td>
+                 {% endif %}
+                 <td>{{ datos.6}}</td>
+                 <td>{{ datos.7}}</td>
+                 <td>{{ datos.8}}</td>
+                 <td>{{ datos.9}}</td>
+               </tr>
+              {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      </div>
+      </div>
+
+</div>
+
+
+{% endblock %}

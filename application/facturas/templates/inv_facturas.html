@@ -1,0 +1,46 @@
+{% extends "layout.html" %} 
+
+{% block content %} 
+
+<div class="container">
+  <div class="col-lg-12">
+<div class="col-lg-6" style="padding-bottom: 20px; padding-top: 20px;">
+  
+  <!--<input type="text" class="form-control" id="myInput3" onkeyup="inventarioGeneral()" placeholder="SKU INDIVISIBLE" required><BR>
+  <input type="text" class="form-control" id="myInput4" onkeyup="inventariNombre()" placeholder="NOMBRE PRODUCTO" required>-->
+
+</div>
+<div class="table-responsive">
+  <table class="table table-bordered table-hover" id="myTable3">
+    <thead>
+      <tr>
+        <th scope="col">SKU INDIVISIBLE</th>
+        <th scope="col">CANTIDAD</th>
+        <th scope="col">TIPO INGRESO</th>
+        <th scope="col">FACTURA</th>
+        <th scope="col">PROCESO</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+         {%  for productos in productos %}
+         <tr>
+           <td>{{ productos.1}}</td>
+           <td>{{ productos.2}}</td>
+           <td>{{ productos.3}}</td>
+           <td>{{ productos.4}}</td>
+           <td><a href="/edit_ingreso/{{productos.0}}">GESTIONAR</a></td>
+         </tr>
+
+         {% endfor %}
+      
+      
+    </tbody>
+  </table>
+</div>
+</div>
+
+</div>
+
+
+{% endblock %}
